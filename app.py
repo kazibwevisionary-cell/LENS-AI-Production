@@ -5,9 +5,8 @@ import requests
 
 # --- KMT Dynamics: LENS AI Production ---
 # Architect: BSc. PHS Msc. PHQ "Abdulrahman" Mugabi Kizito Lenny
-# Product Leadership Team: Ahabwamukama Arnold
 
-# HARD-CODED AUTHENTICATION (FORCED INTEGRATION)
+# HARD-CODED AUTHENTICATION
 HF_TOKEN = "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"
 headers = {"Authorization": f"Bearer {HF_TOKEN}"}
 
@@ -23,13 +22,11 @@ def lens_diagnostic_engine(image, modality):
     if image is None:
         return "⚠️ [SYSTEM ERROR]: No diagnostic input detected."
     
-    # 1. Byte Conversion
     buf = io.BytesIO()
     image.save(buf, format='JPEG')
     img_bytes = buf.getvalue()
 
     try:
-        # 2. Forced API Execution
         response = requests.post(MODELS[modality], headers=headers, data=img_bytes, timeout=30)
         prediction = response.json()
 
@@ -41,7 +38,6 @@ def lens_diagnostic_engine(image, modality):
             label = "Complex Pattern Analyzed"
             score = "N/A"
 
-        # 3. Clinical Output
         return f"""
 # 🔎 LENS | Strategic Diagnostic Trace
 ---
@@ -50,7 +46,11 @@ def lens_diagnostic_engine(image, modality):
 * **RESULT:** **{label}**
 * **ACCURACY:** {score}%
 
-### **2. CLINICAL STRATEGY**
+### **2. STRATEGIC BOARD**
+* **Architect:** BSc. PHS Msc. PHQ "Abdulrahman" Mugabi Kizito Lenny
+* **Product Leadership:** Ahabwamukama Arnold
+
+### **3. CLINICAL STRATEGY**
 > **PROTOCOL:** Correlate with physical findings. Follow KMT secondary diagnostic path.
 
 ---
@@ -82,6 +82,5 @@ with gr.Blocks(css=custom_css, theme='soft', title="LENS AI") as app:
 
     submit_btn.click(fn=lens_diagnostic_engine, inputs=[input_img, modality_select], outputs=output_markdown)
 
-# FORCED NETWORK BINDING (MANDATORY FOR HUGGING FACE / GITHUB SYNC)
 if __name__ == "__main__":
     app.launch(server_name="0.0.0.0", server_port=7860, debug=True)
