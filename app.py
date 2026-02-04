@@ -5,6 +5,7 @@ import requests
 
 # --- KMT Dynamics: LENS AI Production ---
 # Architect: BSc. PHS Msc. PHQ "Abdulrahman" Mugabi Kizito Lenny
+# Product Leadership Team: Ahabwamukama Arnold
 
 # HARD-CODED AUTHENTICATION (FORCED INTEGRATION)
 HF_TOKEN = "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"
